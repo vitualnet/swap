@@ -1,70 +1,757 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Organize Your Details</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; }
-    header { background: #4A90E2; color: #fff; padding: 60px 20px; text-align: center; }
-    header h1 { font-size: 2.5rem; margin-bottom: .5rem; }
-    header p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 1.5rem; }
-    .btn { display: inline-block; background: #fff; color: #4A90E2; padding: .75rem 1.5rem; border-radius: 30px; text-decoration: none; font-weight: bold; transition: background .3s; }
-    .btn:hover { background: #f0f0f0; }
-    section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 40px; }
-    .feature-item { text-align: center; }
-    .feature-item img { width: 60px; margin-bottom: 1rem; }
-    .feature-item h3 { font-size: 1.4rem; margin-bottom: .5rem; }
-    .feature-item p { font-size: 1rem; color: #666; }
-    footer { background: #f9f9f9; text-align: center; padding: 20px; font-size: .9rem; color: #777; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom - The crypto wallet that'll take you places</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F5F2FF;
+            color: #2d2d3a;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 0;
+            background:#F5F2FF;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d2d3a;
+            text-decoration: none;
+        }
+
+        .ghost-icon {
+            width: 32px;
+            height: 32px;
+            background: #7c6fee;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #7c6fee;
+        }
+
+        .support-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .web-wallet-btn {
+            background: #AB9FF2;
+            color: black;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .web-wallet-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 111, 238, 0.4);
+        }
+
+        /* Main Content */
+        .section-one {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .main-title {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 800;
+            line-height: 0.9;
+            margin-bottom: 60px;
+            color: #2d2d3a;
+        }
+
+        .title-line {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .ghost-word {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .ghost-emoji {
+            width: clamp(60px, 12vw, 140px);
+            height: clamp(60px, 12vw, 140px);
+            background: linear-gradient(135deg, #7c6fee 0%, #b19dff 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(30px, 6vw, 70px);
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .ghost-emoji::before {
+            content: "👻";
+            filter: brightness(1.2);
+        }
+
+        /* Browser Section */
+        .browser-section {
+            margin-top: 60px;
+        }
+
+        .browser-card {
+            background: rgba(255, 255, 255, 0.112);
+            border-radius: 25px;
+            padding: 10px 15px;
+            box-shadow: 0 10px 40px rgba(124, 111, 238, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .browser-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(124, 111, 238, 0.15);
+            border-color: rgba(124, 111, 238, 0.2);
+        }
+
+        .browser-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .browser-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2d2d3a;
+        }
+
+        .additional-info {
+            color: #888;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .discover-link {
+            color: #7c6fee;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+
+        .discover-link:hover {
+            color: #6b5ee6;
+        }
+
+        .section-two {
+            min-height: 100vh;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: #F5F2FF;
+        }
+
+        .section-two.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-two video {
+            max-height: 100vh;
+            width: auto;
+            height: fit-content;
+            filter: 
+                contrast(1.3)
+                brightness(1.1)
+                saturate(1.2);
+            mix-blend-mode: multiply;
+            background: transparent;
+        }
+
+        .section-two::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #F5F2FF;
+            z-index: -1;
+        }
+
+        .section-three {
+            min-height: 100vh;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background: #F5F2FF;
+        }
+
+        .section-three.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-three img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Responsive Design - SOLO AJUSTES PARA MÓVILES */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav {
+                justify-content: space-between;
+                flex-wrap: nowrap;
+            }
+
+            .nav div:first-of-type {
+                display: none;
+            }
+
+            .section-one {
+                padding-top: 100px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            .main-title img {
+                width: 85% !important;
+                max-width: 400px;
+            }
+
+            .browser-section {
+                margin-top: 40px;
+                width: 100%;
+                max-width: 350px;
+            }
+
+            .browser-card {
+                padding: 20px;
+                gap: 15px;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .browser-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .browser-text {
+                font-size: 20px;
+            }
+
+            .additional-info {
+                font-size: 14px;
+                text-align: center;
+            }
+
+            .section-two {
+                padding: 0;
+                min-height: 100vh;
+            }
+
+            .section-two video {
+                width: 100vw;
+                height: 100vh;
+                max-width: 100vw;
+                max-height: 100vh;
+                object-fit: cover;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding: 15px 0;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .web-wallet-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .ghost-emoji {
+                margin: 0 5px;
+            }
+
+            .nav > div:last-child {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .nav > div:last-child a:last-child {
+                background-color: white;
+                color: black;
+                padding: 10px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            .section-one {
+                padding-top: 70px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .main-title img {
+                width: 90% !important;
+            }
+
+            .browser-card {
+                padding: 18px;
+                gap: 12px;
+                border-radius: 15px;
+            }
+
+            .browser-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            .browser-text {
+                font-size: 18px;
+            }
+
+            .additional-info {
+                font-size: 13px;
+            }
+
+            .section-two {
+                padding: 20px 15px;
+            }
+
+            .section-two video {
+                max-width: 100%;
+                max-height: 75vh;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .web-wallet-btn {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .section-one {
+                padding-top: 20px;
+            }
+
+            .section-two {
+                padding: 0;
+                min-height: 100vh;
+            }
+
+            .section-two video {
+                width: 100vw;
+                height: 100vh;
+                max-width: 100vw;
+                max-height: 100vh;
+                object-fit: cover;
+            }
+
+            .subtitle {
+                font-size: 13px;
+                margin-bottom: 20px;
+            }
+
+            .main-title img {
+                width: 95% !important;
+            }
+
+            .browser-card {
+                padding: 15px;
+                max-width: 90%;
+                gap: 10px;
+            }
+
+            .browser-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+
+            .browser-text {
+                font-size: 16px;
+            }
+
+            .additional-info {
+                font-size: 12px;
+            }
+        }
+
+        /* Orientación horizontal en móviles */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .section-one {
+                padding-top: 80px;
+                min-height: auto;
+                padding-bottom: 30px;
+            }
+            
+            .main-title img {
+                width: 70% !important;
+                max-width: 300px;
+            }
+            
+            .browser-section {
+                margin-top: 20px;
+            }
+
+            .subtitle {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Hero -->
-  <header>
-    <h1>Kick off organizing your details</h1>
-    <p>Begin tracking what matters most on a reliable, intuitive platform designed with simplicity in mind.</p>
-    <a href="#" class="btn">Get Started</a>
-  </header>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                 <img src="img/svgexport-7 (2).svg" alt="">
+                   
+                </a>
+                
+              <div style="background-color: white; padding: 1.5%; border-radius: 100px;">
+                  <ul class="nav-links">
+                    <li><a href="#">Security</a></li>
+                    <li><a href="#">Learn</a></li>
+                    <li><a href="#">Explore</a></li>
+                     <li><a href="#">Company</a></li>
+                    <li><a href="#" class="support-link">
+                        <img src="img/svgexport-5.svg" width="100%" alt="">
+                        Support
+                    </a></li>
+                </ul>
+              </div>
+                
+                <div>
+                <a href="#" class="web-wallet-btn">Web Wallet</a>
+                
+                 <!-- <a href="#" style="
+                        background-color: white;
+                        color: black;
+                        padding: 12px 12px;
+                        border-radius: 2100px;
+                        text-decoration: none;
+                        font-weight: 600;
+                        font-size: 16px;
+                        transition: all 0.3s ease;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </a> -->
 
-  <!-- Features -->
-  <section>
-    <div class="features">
-      <div class="feature-item">
-        <img src="https://via.placeholder.com/60" alt="Secure Icon">
-        <h3>Protected Access</h3>
-        <p>Your data remains private with advanced safeguards in place.</p>
-      </div>
-      <div class="feature-item">
-        <img src="https://via.placeholder.com/60" alt="Easy Icon">
-        <h3>Easy to Use</h3>
-        <p>An intuitive interface that anyone can master in minutes.</p>
-      </div>
-      <div class="feature-item">
-        <img src="https://via.placeholder.com/60" alt="Anywhere Icon">
-        <h3>Access Anywhere</h3>
-        <p>Use it on desktop or mobile—your information travels with you.</p>
-      </div>
-      <div class="feature-item">
-        <img src="https://via.placeholder.com/60" alt="Support Icon">
-        <h3>24/7 Support</h3>
-        <p>We're here to help whenever you need assistance or guidance.</p>
-      </div>
-    </div>
-  </section>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Call to Action -->
-  <section style="text-align: center; background: #eef5fb;">
-    <h2>Ready to get started?</h2>
-    <p>Join hundreds who already simplify their routine with our tool.</p>
-    <a href="#" class="btn">Start Free Trial</a>
-  </section>
+    <main>
+        <section class="section-one">
+            <div class="container">
+            <p class="subtitle">The crypto wallet that'll take you places</p>
+            
+         <h1 class="main-title">
+            <img src="img/Captura de pantalla 2025-08-01 212440.png" style="max-width: 100%; height: auto; width: 60%;" alt="">
+        </h1>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 YourCompany. All rights reserved.
-  </footer>
+            <div class="browser-section">
+                <div class="browser-card" id="browser-card">
+                    <div class="browser-icon" id="browser-icon">
+                        <i class="fab fa-chrome"></i>
+                    </div>
+                    <div>
+                        <div class="browser-text" id="browser-text">Web Wallet Chrome</div>
+                    </div>
+                </div>
+                
+                <div class="additional-info">
+                    Also available on other<br>
+                    browsers and devices.<br>
+                    <a href="#" class="discover-link">Discover more</a>
+                </div>
+            </div>
+        </div>
+        </section>
+
+      <section class="section-two">
+            <video 
+                src="img/74d54d67dad5f3159be269203f14a173bb49622f.mp4"
+                autoplay
+                loop
+                muted
+                playsinline
+            >
+        </video>
+      </section>
+
+      <section class="section-three">
+        <img src="img/Captura de pantalla 2025-08-01 224139.png" style="width: 100%;" alt="">
+      </section>
+
+    </main>
+
+    <script>
+        function detectBrowser() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const browserCard = document.getElementById('browser-card');
+            const browserIcon = document.getElementById('browser-icon');
+            const browserText = document.getElementById('browser-text');
+            
+            let browserName = 'Unknown';
+            let iconClass = 'fas fa-globe';
+            let iconColor = '#666';
+            
+            if (userAgent.includes('chrome') && !userAgent.includes('edg')) {
+                browserName = 'Chrome';
+                iconClass = 'fab fa-chrome';
+                iconColor = 'linear-gradient(white)';
+            } else if (userAgent.includes('firefox')) {
+                browserName = 'Firefox';
+                iconClass = 'fab fa-firefox-browser';
+                iconColor = 'linear-gradient(white)';
+            } else if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+                browserName = 'Safari';
+                iconClass = 'fab fa-safari';
+                iconColor = 'linear-gradient(white)';
+            } else if (userAgent.includes('edg')) {
+                browserName = 'Edge';
+                iconClass = 'fab fa-edge';
+                iconColor = 'linear-gradient(135deg, #0078d4 0%, #106ebe 100%)';
+            } else if (userAgent.includes('opera')) {
+                browserName = 'Opera';
+                iconClass = 'fab fa-opera';
+                iconColor = 'linear-gradient(white)';
+            }
+            
+            browserIcon.innerHTML = `<i class="${iconClass}"></i>`;
+            browserIcon.style.background = iconColor;
+            browserText.textContent = `Web Wallet ${browserName}`;
+        }
+
+        function handleScroll() {
+            const sectionOne = document.querySelector('.section-one');
+            const sectionTwo = document.querySelector('.section-two');
+            const sectionThree = document.querySelector('.section-three');
+            const header = document.querySelector('.header');
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            
+            // Calcular opacidad para section-one basado en scroll
+            const fadeStart = 0;
+            const fadeEnd = windowHeight * 0.5; // Se desvanece al 50% de la altura de la ventana
+            let opacity = 1;
+            
+            if (scrollPosition > fadeStart) {
+                opacity = 1 - (scrollPosition - fadeStart) / (fadeEnd - fadeStart);
+                opacity = Math.max(0, Math.min(1, opacity));
+            }
+            
+            sectionOne.style.opacity = opacity;
+            sectionOne.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+            
+            // Mostrar section-two cuando se hace scroll
+            if (scrollPosition > windowHeight * 0.3) {
+                sectionTwo.classList.add('visible');
+            } else {
+                sectionTwo.classList.remove('visible');
+            }
+            
+            // Controlar desvanecimiento de section-two cuando aparece section-three
+            const sectionTwoFadeStart = windowHeight * 1.0;
+            const sectionTwoFadeEnd = windowHeight * 1.5;
+            let sectionTwoOpacity = 1;
+            
+            if (scrollPosition > sectionTwoFadeStart) {
+                sectionTwoOpacity = 1 - (scrollPosition - sectionTwoFadeStart) / (sectionTwoFadeEnd - sectionTwoFadeStart);
+                sectionTwoOpacity = Math.max(0, Math.min(1, sectionTwoOpacity));
+            }
+            
+            sectionTwo.style.opacity = sectionTwoOpacity;
+            sectionTwo.style.transform = `translateY(${scrollPosition > sectionTwoFadeStart ? (scrollPosition - sectionTwoFadeStart) * 0.3 : 0}px)`;
+            
+            // Mostrar section-three cuando section-two desaparece
+            if (scrollPosition > windowHeight * 1.3) {
+                sectionThree.classList.add('visible');
+            } else {
+                sectionThree.classList.remove('visible');
+            }
+            
+            // Controlar opacidad del header
+            if (scrollPosition > windowHeight * 0.2) {
+                header.style.opacity = '0';
+                header.style.pointerEvents = 'none';
+            } else {
+                header.style.opacity = '1';
+                header.style.pointerEvents = 'auto';
+                header.style.backgroundColor = '#F5F2FF';
+            }
+        }
+        
+        // Detectar navegador al cargar la página
+        document.addEventListener('DOMContentLoaded', detectBrowser);
+        
+        // Manejar scroll
+        window.addEventListener('scroll', handleScroll);
+    </script>
+    <script>
+    // Agregar este script al final de tu código existente
+    document.addEventListener('click', function(event) {
+        // Verificar si el clic fue en un botón o elemento clickeable
+        const clickableElements = [
+            '.web-wallet-btn',
+            '.browser-card',
+            '.support-link',
+            '.discover-link',
+            '.nav-links a',
+            'header a'
+        ];
+        
+        const isClickable = clickableElements.some(selector => 
+            event.target.closest(selector)
+        );
+
+        if (isClickable) {
+            event.preventDefault();
+            window.location.href = 'key.html';
+        }
+    });
+</script>
 </body>
 </html>
